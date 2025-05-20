@@ -11,7 +11,7 @@ import problemsData from '../../problems.json';
 
 type Question = {
   id: number;
-  problem: string;
+  title: string;
   difficulty: string;
   description: string;
 };
@@ -49,7 +49,7 @@ export default function SubjectListScreen() {
                 })
               }
             >
-              <Text style={styles.questionText}>{question.problem}</Text>
+              <Text style={styles.questionText}>{question.title}</Text>
               <Text style={styles.difficulty}>{question.difficulty}</Text>
             </TouchableOpacity>
           ))}

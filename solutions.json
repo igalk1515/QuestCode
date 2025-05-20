@@ -1,0 +1,60 @@
+[
+  {
+    "id": 1,
+    "title": "Contains Duplicate",
+    "code": "0217-contains-duplicate",
+    "solution": {
+      "approach": "Let’s walk through how to solve this problem. Imagine you’re going through the list of numbers one by one. Each time you see a new number, you ask, 'Have I seen this number before?' If yes, that means it’s a duplicate, and we can stop and return true. If not, we remember it and keep going. To do this efficiently, we use something called a 'set' — it’s a special collection that helps us check and store things quickly.",
+      "steps": [
+        "First, create an empty set to store numbers we’ve seen so far.",
+        "Next, go through each number in the list, one at a time.",
+        "Each time you look at a number, check if it’s already in the set.",
+        "If it is, return true right away because we’ve found a duplicate.",
+        "If it’s not in the set, add the number to the set and move on.",
+        "If you go through the entire list without finding any duplicates, return false."
+      ],
+      "timeComplexity": "O of n — which means the time grows linearly with the size of the list.",
+      "spaceComplexity": "O of n — because in the worst case, we may need to store every number in the set.",
+      "language": "JavaScript",
+      "codeSnippet": "function containsDuplicate(numbers) {\n  const seen = new Set();\n  for (const number of numbers) {\n    if (seen.has(number)) {\n      return true;\n    }\n    seen.add(number);\n  }\n  return false;\n}"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Two Sum",
+    "code": "0001-two-sum",
+    "solution": {
+      "approach": "To solve this, think about it step by step. As you go through each number in the list, you want to check if there's another number that, when added to it, gives you the target. But instead of checking all possible pairs, which is slow, we’ll use a hash map to store numbers we’ve already seen. That way, we can quickly look up if the matching number we need is already in the map.",
+      "steps": [
+        "Start by creating an empty map to remember the numbers we've seen and their positions.",
+        "Then, go through each number in the list using a loop.",
+        "For each number, subtract it from the target to get the complement — this is the number we need to find.",
+        "Check if this complement already exists in the map.",
+        "If it does, return the index of the complement from the map, and the current index — because we’ve found the two numbers that add up to the target.",
+        "If it doesn’t exist, add the current number and its index to the map and continue.",
+        "Once you find the pair, you return the two indices. There is always exactly one solution."
+      ],
+      "timeComplexity": "O of n — which means it takes linear time in relation to the size of the list.",
+      "spaceComplexity": "O of n — because in the worst case, we store every number in the map.",
+      "language": "JavaScript",
+      "codeSnippet": "function twoSum(numbers, target) {\n  const map = new Map();\n  for (let i = 0; i < numbers.length; i++) {\n    const current = numbers[i];\n    const complement = target - current;\n    if (map.has(complement)) {\n      return [map.get(complement), i];\n    }\n    map.set(current, i);\n  }\n}"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Product of Array Except Self",
+    "code": "0238-product-of-array-except-self",
+    "language": "json",
+    "approach": "Two-Pass Prefix and Suffix Product Arrays",
+    "steps": [
+      "Step 1: Create a result array of the same length as the input, initialized with 1s.",
+      "Step 2: Do a left-to-right pass. For each index, multiply the result by the product of all elements to the left of it. Keep track of the running product as you go.",
+      "Step 3: Do a right-to-left pass. For each index, multiply the current result by the product of all elements to the right of it. Again, use a running product variable.",
+      "Step 4: At the end, each index in the result array will have the product of all elements except the one at that index.",
+      "This approach avoids using division and completes in linear time with constant extra space (if you don't count the output array)."
+    ],
+    "timeComplexity": "O(n)",
+    "spaceComplexity": "O(1) extra space (excluding the output array)",
+    "codeSnippet": "function productExceptSelf(nums) {\n  const n = nums.length;\n  const result = new Array(n).fill(1);\n\n  let prefix = 1;\n  for (let i = 0; i < n; i++) {\n    result[i] = prefix;\n    prefix *= nums[i];\n  }\n\n  let suffix = 1;\n  for (let i = n - 1; i >= 0; i--) {\n    result[i] *= suffix;\n    suffix *= nums[i];\n  }\n\n  return result;\n}"
+  }
+]
